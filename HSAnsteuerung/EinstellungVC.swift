@@ -125,6 +125,22 @@ class EinstellungVC: UIViewController,MQTTSessionDelegate {
         }
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "EinstellungNachAnsteuerung"){
+            let ansteuerungVC:AnsteuerungVC = segue.destination as! AnsteuerungVC
+            
+            if(ansteuerungVC.mqttClient == nil){
+                ansteuerungVC.mqttClient = self.mqttClient
+            }
+        }else if(segue.identifier == "EinstellungNachVerbindung"){
+            let verbindungVC:VerbindungVC = segue.destination as! VerbindungVC
+            
+            if(verbindungVC.mqttClient == nil){
+                verbindungVC.mqttClient = self.mqttClient
+            }
+        }
+    }
  
 
 }

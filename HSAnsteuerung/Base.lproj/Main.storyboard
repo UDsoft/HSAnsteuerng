@@ -805,7 +805,7 @@
                                             <constraint firstAttribute="height" constant="318" id="JFQ-jQ-eDC"/>
                                         </constraints>
                                     </imageView>
-                                    <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlB-Tp-QvB">
+                                    <pickerView tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlB-Tp-QvB">
                                         <rect key="frame" x="72" y="0.0" width="164" height="318"/>
                                     </pickerView>
                                 </subviews>
@@ -843,7 +843,7 @@
                                             <constraint firstAttribute="width" constant="73" id="xib-dy-hzB"/>
                                         </constraints>
                                     </imageView>
-                                    <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzQ-Eb-Sq6">
+                                    <pickerView tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzQ-Eb-Sq6">
                                         <rect key="frame" x="72" y="0.0" width="164" height="318"/>
                                     </pickerView>
                                 </subviews>

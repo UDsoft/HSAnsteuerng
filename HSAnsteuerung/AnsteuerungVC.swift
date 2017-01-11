@@ -12,7 +12,6 @@ import SwiftMQTT
 class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDelegate,MQTTSessionDelegate{
     
     @IBOutlet weak var xAchsePicker: UIPickerView!
-    @IBOutlet weak var testLabel: UILabel!
     @IBOutlet weak var yAchsePicker: UIPickerView!
     @IBOutlet weak var zAchsePicker: UIPickerView!
     @IBOutlet weak var a1SwitchOutlet: UISwitch!
@@ -58,13 +57,27 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if(pickerView.tag == 1){
+        /*if(pickerView.tag == 1){
             testLabel.text = "1 " + pickerData[row]
         }else if(pickerView.tag == 2){
             testLabel.text = "2 " + pickerData[row]
         }else if(pickerView.tag == 3){
             testLabel.text = "3 " + pickerData[row]
+        }*/
+        let pinValue = String(describing : pickerData[row])
+        let pinName = String(describing: pickerView.tag)
+        
+        let jsonDict = [pinName: pinValue]
+        let data = try!JSONSerialization.data(withJSONObject: jsonDict, options: .prettyPrinted)
+
+        mqttClient?.publish(data, in: "pinName/Value", delivering: .atLeastOnce, retain: true){ (succeeded, error) in
+            if(succeeded){
+                print("all is ok")
+            }else{
+                print(error)
+            }
         }
+        
     }
 
     
@@ -100,15 +113,22 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
 
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if(segue.identifier == "AnsteuerungNachEinstellung"){
+            let einstellungVC:EinstellungVC = segue.destination as! EinstellungVC
+            
+            if(einstellungVC.mqttClient == nil){
+                einstellungVC.mqttClient = self.mqttClient
+            }
+        }
     }
-    */
+    
     
     func mqttDidDisconnect(session: MQTTSession) {
         

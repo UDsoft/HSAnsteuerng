@@ -34,6 +34,26 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mqttClient?.delegate = self
+        
+        if(mqttClient != nil){
+            let connectionTestData = ["Test":"UDDEVICE"]
+            let data = try! JSONSerialization.data(withJSONObject: connectionTestData, options: .prettyPrinted)
+            
+            mqttClient?.publish(data, in: "/TEST/CONNECTION", delivering: .exactlyOnce, retain: false){ (succeeded, error) in
+                
+                print(succeeded)
+                if(succeeded){
+                    self.showConnectionStatus(connectionStatus: true)
+
+                }
+            }
+        }else{
+            print("mqttClient is empty")
+        }
+
+        
         //check Anonymous
         isMqttAccessSecure = showUsernamePasswordTextView(appMemory.bool(forKey: Keys.Mqtt_Anonymous.rawValue))
         
@@ -60,7 +80,8 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
         }else{
             mqttSecureSwitch.setOn(false, animated: false)
         }
-   
+        
+        
         
     }
 
