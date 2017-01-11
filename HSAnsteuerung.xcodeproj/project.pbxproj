@@ -85,7 +85,6 @@
 				489455391E25690C0074149B /* View */,
 				489455381E2569000074149B /* ViewController */,
 				489455361E2568EC0074149B /* Model */,
-				489455341E2568D30074149B /* NSDefaultKeys.swift */,
 			);
 			path = HSAnsteuerung;
 			sourceTree = "<group>";
@@ -93,9 +92,7 @@
 		489455361E2568EC0074149B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				489455401E256AD00074149B /* AnsteuerungVC.swift */,
-				4894553E1E256AC30074149B /* EinstellungVC.swift */,
-				4894553C1E256AB60074149B /* VerbindungVC.swift */,
+				489455341E2568D30074149B /* NSDefaultKeys.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -103,9 +100,9 @@
 		489455381E2569000074149B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				48013BB91E2563E300A3C849 /* LaunchScreen.storyboard */,
-				48013BB71E2563E300A3C849 /* Assets.xcassets */,
-				48013BB11E2563E300A3C849 /* Main.storyboard */,
+				489455401E256AD00074149B /* AnsteuerungVC.swift */,
+				4894553E1E256AC30074149B /* EinstellungVC.swift */,
+				4894553C1E256AB60074149B /* VerbindungVC.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -113,8 +110,11 @@
 		489455391E25690C0074149B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				48013BB91E2563E300A3C849 /* LaunchScreen.storyboard */,
 				489455421E256B510074149B /* Alert.swift */,
 				4894553A1E256AAE0074149B /* VerbindungTextField.swift */,
+				48013BB11E2563E300A3C849 /* Main.storyboard */,
+				48013BB71E2563E300A3C849 /* Assets.xcassets */,
 			);
 			name = View;
 			sourceTree = "<group>";

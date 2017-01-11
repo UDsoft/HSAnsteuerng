@@ -15,6 +15,7 @@ class EinstellungVC: UIViewController {
     var appMemory = UserDefaults.standard
     
     var gpioDictionary = [String:String]()
+    var buttonArray = [UIButton]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,12 @@ class EinstellungVC: UIViewController {
             gpioDictionary = appMemory.dictionary(forKey: GPIODICTIONARYKEY) as! [String : String]
             for (gpioPin , gpioName) in gpioDictionary {
                 print(gpioPin +  " : " + gpioName)
+                let gpioInt = Int(gpioPin)
+                
+                //Search the button from the button View Tag
+                let gpioSetButton:UIButton = self.view.viewWithTag(gpioInt!)! as! UIButton
+                settingName(sender: gpioSetButton, gpioName: gpioName)
+                
             }
         }
         
@@ -59,17 +66,20 @@ class EinstellungVC: UIViewController {
             gpioName = (self.InputTextField?.text)!
             print(gpioName)
             let defaultTitle = "N/A"
-            if(!gpioName.isEmpty || (sender.titleLabel?.text?.contains(defaultTitle))!){
+            if(!gpioName.isEmpty){
                 sender.setTitle(gpioName, for: .normal)
                 sender.backgroundColor = UIColor.blue
                 sender.alpha = 0.8
                 sender.setTitleColor(UIColor.white, for: .normal)
                 self.gpioDictionary[String(gpioNum)] = gpioName
+                self.appMemory.setValue(self.gpioDictionary, forKey: self.GPIODICTIONARYKEY)
             }else{
                 sender.setTitle(defaultTitle, for: .normal)
                 sender.backgroundColor = UIColor.green
                 sender.alpha = 0.5
                 sender.setTitleColor(UIColor.black, for: .normal)
+                self.gpioDictionary.removeValue(forKey: String(gpioNum))
+                self.appMemory.setValue(self.gpioDictionary, forKey: self.GPIODICTIONARYKEY)
             }
            
         }
@@ -81,6 +91,22 @@ class EinstellungVC: UIViewController {
         
         self.present(gpioManipulator, animated: true)
         
+    }
+    
+    func settingName(sender:UIButton,gpioName:String) {
+        let defaultTitle = "N/A"
+        if(!gpioName.contains(defaultTitle) || !gpioName.isEmpty){
+            sender.setTitle(gpioName, for: .normal)
+            sender.backgroundColor = UIColor.blue
+            sender.alpha = 0.8
+            sender.setTitleColor(UIColor.white, for: .normal)
+        }else{
+            sender.setTitle(defaultTitle, for: .normal)
+            sender.backgroundColor = UIColor.green
+            sender.alpha = 0.5
+            sender.setTitleColor(UIColor.black, for: .normal)
+
+        }
     }
     
  
