@@ -9,7 +9,7 @@
 import UIKit
 import SwiftMQTT
 
-class VerbindungVC: UIViewController{
+class VerbindungVC: UIViewController, MQTTSessionDelegate{
     
     @IBOutlet weak var ipAddressTextView: UITextField!
     @IBOutlet weak var portNummerTextView: UITextField!
@@ -178,15 +178,35 @@ class VerbindungVC: UIViewController{
 
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if(segue.identifier == "VerbindungNachEinstellung"){
+            let einstellungVC:EinstellungVC = segue.destination as! EinstellungVC
+            
+            if(einstellungVC.mqttClient == nil){
+                einstellungVC.mqttClient = self.mqttClient
+
+            }
+        }
+        
+        
     }
-    */
+    
+    func mqttDidReceive(message data: Data, in topic: String, from session: MQTTSession) {
+        
+    }
+    
+    func mqttSocketErrorOccurred(session: MQTTSession) {
+        
+    }
+    
+    func mqttDidDisconnect(session: MQTTSession) {
+        
+    }
+    
     
     
 }

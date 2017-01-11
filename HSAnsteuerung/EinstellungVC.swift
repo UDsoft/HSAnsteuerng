@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftMQTT
 
-class EinstellungVC: UIViewController {
+class EinstellungVC: UIViewController,MQTTSessionDelegate {
     
     public let GPIODICTIONARYKEY = "GPIODICTIONARY"
    
@@ -16,6 +17,8 @@ class EinstellungVC: UIViewController {
     
     var gpioDictionary = [String:String]()
     var buttonArray = [UIButton]()
+    
+    public var mqttClient:MQTTSession?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +38,23 @@ class EinstellungVC: UIViewController {
                 
             }
         }
-        
-        
+        mqttClient?.delegate = self
         
     }
+    
+    
+    func mqttDidDisconnect(session: MQTTSession) {
+        
+    }
+    
+    func mqttSocketErrorOccurred(session: MQTTSession) {
+        
+    }
+    
+    func mqttDidReceive(message data: Data, in topic: String, from session: MQTTSession) {
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

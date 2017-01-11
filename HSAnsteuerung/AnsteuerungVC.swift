@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftMQTT
 
-class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDelegate{
+class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDelegate,MQTTSessionDelegate{
     
     @IBOutlet weak var xAchsePicker: UIPickerView!
     @IBOutlet weak var testLabel: UILabel!
@@ -18,6 +19,8 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     @IBOutlet weak var a2SwitchOutlet: UISwitch!
     @IBOutlet weak var a3SwitchOutlet: UISwitch!
     
+    
+    var mqttClient:MQTTSession?
     
     
     var pickerData = ["0"]
@@ -31,6 +34,7 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         yAchsePicker.delegate = self
         zAchsePicker.dataSource = self
         zAchsePicker.delegate = self
+        mqttClient?.delegate = self
         
     }
 
@@ -105,5 +109,17 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func mqttDidDisconnect(session: MQTTSession) {
+        
+    }
+    
+    func mqttSocketErrorOccurred(session: MQTTSession) {
+        
+    }
+    
+    func mqttDidReceive(message data: Data, in topic: String, from session: MQTTSession) {
+        
+    }
 
 }
