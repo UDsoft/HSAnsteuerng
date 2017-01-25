@@ -12,6 +12,8 @@ import SwiftMQTT
 
 class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDelegate,MQTTSessionDelegate{
     
+    let appMemory = UserDefaults.standard
+    
     @IBOutlet weak var connectBtn: UIButton!
     @IBOutlet weak var xAchsePicker: UIPickerView!
     @IBOutlet weak var yAchsePicker: UIPickerView!
@@ -20,17 +22,21 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     @IBOutlet weak var a2SwitchOutlet: UISwitch!
     @IBOutlet weak var a3SwitchOutlet: UISwitch!
     @IBOutlet weak var aSwitch: UIButton!
+    @IBOutlet weak var informationRequire: UIButton!
     var isConnected:Bool=false
     var mqttClient:MQTTSession?
     var pickerData = ["0"]
+    
+    //This boolean is variable for stating if the manipulater picker is on switched state and not in switched off state. if the state is switched Off the touch gesture will be false. So User cannot manipulate the picker accidentally.
     var a1Enable:Bool = true
     var a2Enable:Bool = true
     var a3Enable:Bool = true
     
-    
-    //Todo:
+    //Todo:Transfer this to SharedUser ** DONE Just left to be initialised
     var defaultIPAddress:String = "192.168.0.101"
     var defaultPort:Int = 1883
+    var userName:String = ""
+    var password:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +49,34 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         zAchsePicker.delegate = self
         mqttClient?.delegate = self
         
-        mqttConnect(host: defaultIPAddress, port: UInt16(defaultPort), clientID: "UDIPAD",username: "darwin" , password: "21", cleanSession: true, keepAlive: 15)
+        if(appMemory.bool(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)){
+           defaultIPAddress = appMemory.string(forKey: Keys.Mqtt_Ip_Address.rawValue)!
+           defaultPort = appMemory.integer(forKey: Keys.Mqtt_Port.rawValue)
+        userName = appMemory.string(forKey: Keys.Mqtt_UserName.rawValue)!
+            password = appMemory.string(forKey: Keys.Mqtt_Password.rawValue)!
+            
+        }else{
+            defaultIPAddress = appMemory.string(forKey: Keys.Mqtt_Ip_Address.rawValue)!
+            defaultPort = appMemory.integer(forKey: Keys.Mqtt_Port.rawValue)
+        }
         
+        mqttConnect(host: defaultIPAddress, port: UInt16(defaultPort), clientID: "UDIPAD",username: userName , password: password, cleanSession: true, keepAlive: 15)
+        
+    }
+
+    //This method will call for an uialeart with a text fill to give the name for the following action. This name is currently on planned to be used in client side to ensure user to know what the action will do once they come back to the app after awhile. This Action name will be saved in sharedpreference and retrieved using the key "X_ACTION_NAME", "Y_ACTION_NAME","Z_ACTION_NAME"
+    @IBAction func setActionName(_ sender: UIButton) {
+    }
+    
+    //Method to show the information like which ipaddress broker is the client is currently connected to with the port number . this enable the user to know and change the ipaddress in verbindung view if the broker ip address the client connecting is not the same as the real broker ip address.
+    @IBAction func informationBroadcast(_ sender: UIButton) {
+        let informationBroadcast = UIAlertController.init(title: "Server Verbindung Details", message: "Ip Address : " + defaultIPAddress + ":" + String(defaultPort), preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "JA", style: .default, handler: nil)
+        
+        informationBroadcast.addAction(okAction)
+        
+        self.present(informationBroadcast,animated:true,completion: nil)
         
     }
     
@@ -113,6 +145,9 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         return myTitle
     }
     
+    
+    //This method populate the database of the picker view 
+    //The firstValue is the value of the start of the pickerView and the last is the maximum value of the picker view.
     func dataBasePopulator(firstValue:Int,lastValue:Int){
         for x in firstValue...lastValue{
             pickerData.append(String(x))

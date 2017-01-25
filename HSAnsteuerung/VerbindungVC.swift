@@ -125,6 +125,7 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
                 appMemory.set(passwordvalue, forKey: Keys.Mqtt_Password.rawValue)
             }
             appMemory.set(isMqttAccessSecure, forKey: Keys.Mqtt_Anonymous.rawValue)
+            appMemory.set(true, forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)
             mqttConnect(host: ipAddressValue, port: UInt16(port), clientID: "iOSDev", username: userNameValue, password: passwordvalue, cleanSession: true, keepAlive: 15)
         }
     }

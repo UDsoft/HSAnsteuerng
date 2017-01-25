@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let appMemory = UserDefaults.standard
+    public let appMemory = UserDefaults.standard
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -22,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(appMemory.value(forKey: Keys.Mqtt_Anonymous.rawValue) == nil){
             appMemory.set(true, forKey: Keys.Mqtt_Anonymous.rawValue)
         }
+        
+        if(appMemory.value(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue) == nil){
+            let defaultIpAddress = "192.168.0.101"
+            let defaultPort = "1883"
+            appMemory.set(defaultIpAddress, forKey: Keys.default_mqtt_Ip_Address.rawValue)
+            appMemory.set(defaultPort, forKey: Keys.default_Mqtt_Port.rawValue)
+            appMemory.set(false, forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)
+        }
+   
 
         return true
     }

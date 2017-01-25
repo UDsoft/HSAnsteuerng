@@ -12,6 +12,7 @@
 		48013BB61E2563E300A3C849 /* HSAnsteuerung.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48013BB41E2563E300A3C849 /* HSAnsteuerung.xcdatamodeld */; };
 		48013BB81E2563E300A3C849 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48013BB71E2563E300A3C849 /* Assets.xcassets */; };
 		48013BBB1E2563E300A3C849 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48013BB91E2563E300A3C849 /* LaunchScreen.storyboard */; };
+		4844BB2C1E38DAA6009EF60E /* DataSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844BB2B1E38DAA6009EF60E /* DataSend.swift */; };
 		489455351E2568D30074149B /* NSDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489455341E2568D30074149B /* NSDefaultKeys.swift */; };
 		4894553B1E256AAE0074149B /* VerbindungTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4894553A1E256AAE0074149B /* VerbindungTextField.swift */; };
 		4894553D1E256AB60074149B /* VerbindungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4894553C1E256AB60074149B /* VerbindungVC.swift */; };
@@ -30,6 +31,7 @@
 		48013BB71E2563E300A3C849 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48013BBA1E2563E300A3C849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48013BBC1E2563E300A3C849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4844BB2B1E38DAA6009EF60E /* DataSend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSend.swift; sourceTree = "<group>"; };
 		489455341E2568D30074149B /* NSDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDefaultKeys.swift; sourceTree = "<group>"; };
 		4894553A1E256AAE0074149B /* VerbindungTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbindungTextField.swift; sourceTree = "<group>"; };
 		4894553C1E256AB60074149B /* VerbindungVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbindungVC.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				489455341E2568D30074149B /* NSDefaultKeys.swift */,
+				4844BB2B1E38DAA6009EF60E /* DataSend.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				489455411E256AD00074149B /* AnsteuerungVC.swift in Sources */,
 				4894553B1E256AAE0074149B /* VerbindungTextField.swift in Sources */,
 				489455351E2568D30074149B /* NSDefaultKeys.swift in Sources */,
+				4844BB2C1E38DAA6009EF60E /* DataSend.swift in Sources */,
 				4894553F1E256AC30074149B /* EinstellungVC.swift in Sources */,
 				48013BAE1E2563E300A3C849 /* AppDelegate.swift in Sources */,
 				4894553D1E256AB60074149B /* VerbindungVC.swift in Sources */,
