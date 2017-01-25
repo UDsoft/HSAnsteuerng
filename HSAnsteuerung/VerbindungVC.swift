@@ -19,10 +19,7 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var passwordlabel: UILabel!
     @IBOutlet weak var statusLight: UIImageView!
-    
-    
     let appMemory = UserDefaults.standard
-    
     //Variables
     var ipAddressValue : String = ""
     var port:Int = 0
@@ -34,13 +31,10 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mqttClient?.delegate = self
-        
         if(mqttClient != nil){
             let connectionTestData = ["Test":"UDDEVICE"]
             let data = try! JSONSerialization.data(withJSONObject: connectionTestData, options: .prettyPrinted)
-            
             mqttClient?.publish(data, in: "/TEST/CONNECTION", delivering: .exactlyOnce, retain: false){ (succeeded, error) in
                 
                 print(succeeded)
@@ -52,11 +46,8 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
         }else{
             print("mqttClient is empty")
         }
-
-        
         //check Anonymous
         isMqttAccessSecure = showUsernamePasswordTextView(appMemory.bool(forKey: Keys.Mqtt_Anonymous.rawValue))
-        
         if(appMemory.value(forKey:Keys.Mqtt_Ip_Address.rawValue) != nil){
             ipAddressTextView.text = appMemory.string(forKey: Keys.Mqtt_Ip_Address.rawValue)
             ipAddressValue = ipAddressTextView.text!
@@ -65,7 +56,6 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
             port = Int(appMemory.integer(forKey: Keys.Mqtt_Port.rawValue))
             portNummerTextView.text = String(port)
         }
-        
         //To avoid crush check if the anonymousOption is not hidden
         if(isMqttAccessSecure){
             mqttSecureSwitch.setOn(true, animated: false)
@@ -80,9 +70,6 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
         }else{
             mqttSecureSwitch.setOn(false, animated: false)
         }
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,9 +83,7 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
     }
     
     @IBAction func verbindenAction(_ sender: UIButton) {
-        
        var validTextViewsValues:Bool = true
-        
         if(ipAddressTextView.text?.isEmpty)!{
             Alert.show(title: "Ip Address Fehler", message: "Bitte geben Sie die Mqtt Server Ip Address", vc: self)
             validTextViewsValues = false
@@ -124,7 +109,6 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
             }else{
                 self.userNameValue = userNameTextView.text!
             }
-            
             if(passwordTextView.text?.isEmpty)!{
                 Alert.show(title: "Der Kennwort leer", message: "Bitte geben Sie der Kennwort", vc: self)
                 validTextViewsValues = false
@@ -143,23 +127,17 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
             appMemory.set(isMqttAccessSecure, forKey: Keys.Mqtt_Anonymous.rawValue)
             mqttConnect(host: ipAddressValue, port: UInt16(port), clientID: "iOSDev", username: userNameValue, password: passwordvalue, cleanSession: true, keepAlive: 15)
         }
-        
     }
     
     private func mqttConnect(host:String, port:UInt16,clientID:String,username:String , password:String,cleanSession:Bool,keepAlive:UInt16,useSSL:Bool=false){
-        
-
         mqttClient = MQTTSession.init(host:host, port: port, clientID: clientID, cleanSession: cleanSession, keepAlive: keepAlive, useSSL: useSSL);
-        
         mqttClient!.connect{(succeeded, error) -> Void in
             if (succeeded){
                self.showConnectionStatus(connectionStatus: true)
             }else{
                self.showConnectionStatus(connectionStatus: false)
             }
-            
       }
-        
     }
     
     
@@ -195,10 +173,6 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
             return false
         }
     }
-
-
-    
-
     
     // MARK: - Navigation
 
@@ -209,11 +183,8 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
             
             if(einstellungVC.mqttClient == nil){
                 einstellungVC.mqttClient = self.mqttClient
-
             }
         }
-        
-        
     }
     
     func mqttDidReceive(message data: Data, in topic: String, from session: MQTTSession) {
