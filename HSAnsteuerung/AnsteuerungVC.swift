@@ -27,6 +27,8 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     var a2Enable:Bool = true
     var a3Enable:Bool = true
     
+    
+    //Todo:
     var defaultIPAddress:String = "192.168.0.101"
     var defaultPort:Int = 1883
     
