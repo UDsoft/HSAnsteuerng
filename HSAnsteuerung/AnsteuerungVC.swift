@@ -18,11 +18,12 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     @IBOutlet weak var xAchsePicker: UIPickerView!
     @IBOutlet weak var yAchsePicker: UIPickerView!
     @IBOutlet weak var zAchsePicker: UIPickerView!
-    @IBOutlet weak var a1SwitchOutlet: UISwitch!
-    @IBOutlet weak var a2SwitchOutlet: UISwitch!
-    @IBOutlet weak var a3SwitchOutlet: UISwitch!
+
     @IBOutlet weak var aSwitch: UIButton!
     @IBOutlet weak var informationRequire: UIButton!
+    @IBOutlet weak var zActionLabelButton: UIButton!
+    @IBOutlet weak var yActionLabelButton: UIButton!
+    @IBOutlet weak var xActionLabelButton: UIButton!
     var isConnected:Bool=false
     var mqttClient:MQTTSession?
     var pickerData = ["0"]
@@ -49,7 +50,7 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         zAchsePicker.delegate = self
         mqttClient?.delegate = self
         
-        if(appMemory.bool(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)){
+        /**if(appMemory.bool(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)){
            defaultIPAddress = appMemory.string(forKey: Keys.Mqtt_Ip_Address.rawValue)!
            defaultPort = appMemory.integer(forKey: Keys.Mqtt_Port.rawValue)
         userName = appMemory.string(forKey: Keys.Mqtt_UserName.rawValue)!
@@ -59,13 +60,18 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
             defaultIPAddress = appMemory.string(forKey: Keys.Mqtt_Ip_Address.rawValue)!
             defaultPort = appMemory.integer(forKey: Keys.Mqtt_Port.rawValue)
         }
-        
+        */
         mqttConnect(host: defaultIPAddress, port: UInt16(defaultPort), clientID: "UDIPAD",username: userName , password: password, cleanSession: true, keepAlive: 15)
+        
+    }
+    //This method is called is the changes in the model GPIOInit is made
+    func pinInitialization() {
         
     }
 
     //This method will call for an uialeart with a text fill to give the name for the following action. This name is currently on planned to be used in client side to ensure user to know what the action will do once they come back to the app after awhile. This Action name will be saved in sharedpreference and retrieved using the key "X_ACTION_NAME", "Y_ACTION_NAME","Z_ACTION_NAME"
     @IBAction func setActionName(_ sender: UIButton) {
+        
     }
     
     //Method to show the information like which ipaddress broker is the client is currently connected to with the port number . this enable the user to know and change the ipaddress in verbindung view if the broker ip address the client connecting is not the same as the real broker ip address.
@@ -91,6 +97,8 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         }
     }
     
+
+    
     private func showConnectionStatus(isConnected:Bool){
         if(isConnected){
             
@@ -115,21 +123,27 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let pinLabelName = "pinName"
-        let pinLabelValue = "value"
-        let pinLabelNumber = "pinNumber"
+      
+        var group:String = ""
         
-        let pinValue = String(describing : pickerData[row])
-        let pinName = String(describing : pickerView.tag)
+        let value = pickerData[row]
+        switch pickerView.tag{
+        case 1:
+            group = "X"
+        case 2:
+            group = "Y"
+        case 3:
+            group = "Z"
+        default: break
+            
+            
+        }
         
-        let pinNumber = "1"
-    
         
-        let jsonDict = [pinLabelName:pinName,pinLabelValue:pinValue,pinLabelNumber:pinNumber]
         
-        let data = try!JSONSerialization.data(withJSONObject: jsonDict, options: .prettyPrinted)
-
-        mqttClient?.publish(data, in: "pinName/Value", delivering: .atLeastOnce, retain: true){ (succeeded, error) in
+        let data:DataSend = DataSend(group: group, value: value)
+        
+        mqttClient?.publish(data.getDataJson(), in: "/pin/value", delivering: .atLeastOnce, retain: true){ (succeeded, error) in
             if(succeeded){
                 print(data)
             }else{
@@ -186,49 +200,50 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     
     @IBAction func switchPicker(_ sender: UIButton) {
         let tag = sender.tag
-        let alpha:CGFloat = 0.7
         switch tag {
         case 4:
             if(a1Enable){
-                sender.setImage(#imageLiteral(resourceName: "OffSwitch"), for: .normal)
-                xAchsePicker.isUserInteractionEnabled = false
-                xAchsePicker.alpha = alpha
+                switchOffAnimation(sender:sender,achsePicker: xAchsePicker)
                 a1Enable = false
             }else{
-                sender.setImage(#imageLiteral(resourceName: "OnSwitch"), for: .normal)
-                xAchsePicker.isUserInteractionEnabled = true;
-                xAchsePicker.alpha = 1
+                switchOnAnimation(sender: sender, achsePicker: xAchsePicker)
                 a1Enable = true
             }
         case 5:
             if(a2Enable){
-                sender.setImage(#imageLiteral(resourceName: "OffSwitch"), for: .normal)
-                yAchsePicker.isUserInteractionEnabled = false
-                yAchsePicker.alpha = alpha
+               switchOffAnimation(sender: sender, achsePicker: yAchsePicker)
                 a2Enable = false
             }else{
-                sender.setImage(#imageLiteral(resourceName: "OnSwitch"), for: .normal)
-                yAchsePicker.isUserInteractionEnabled = true
-                yAchsePicker.alpha = 1
+               switchOnAnimation(sender: sender, achsePicker: yAchsePicker)
                 a2Enable = true
             }
             
         case 6:
             if(a3Enable){
-                sender.setImage(#imageLiteral(resourceName: "OffSwitch"), for: .normal)
-                zAchsePicker.isUserInteractionEnabled = false
-                zAchsePicker.alpha = alpha
+                switchOffAnimation(sender: sender, achsePicker: zAchsePicker)
                 a3Enable = false
             }else{
-                sender.setImage(#imageLiteral(resourceName: "OnSwitch"), for: .normal)
-                zAchsePicker.isUserInteractionEnabled = true
-                zAchsePicker.alpha = 1
+                switchOnAnimation(sender: sender, achsePicker: zAchsePicker)
                 a3Enable = true
             }
         default:
             break
         }
         
+    }
+    
+    private func switchOffAnimation(sender:UIButton,achsePicker:UIPickerView){
+        let alpha:CGFloat = 0.7
+        sender.setImage(#imageLiteral(resourceName: "OffSwitch"), for: .normal)
+        achsePicker.isUserInteractionEnabled = false
+        achsePicker.alpha = alpha
+        
+    }
+    
+    private func switchOnAnimation(sender:UIButton,achsePicker:UIPickerView){
+        sender.setImage(#imageLiteral(resourceName: "OnSwitch"), for: .normal)
+        achsePicker.isUserInteractionEnabled = true;
+        achsePicker.alpha = 1
     }
     
     func mqttDidDisconnect(session: MQTTSession) {

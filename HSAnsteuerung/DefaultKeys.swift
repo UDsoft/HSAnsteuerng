@@ -20,4 +20,19 @@ enum Keys:String{
     case X_ACTION_NAME = "X_NAME"
     case Y_ACTION_NAME = "Y_NAME"
     case Z_ACTION_NAME = "Z_NAME"
+    case Gpio_Pin_Dictionary = "GPIODICTIONARY"
+}
+
+enum Topics:String{
+    case INITIALIZATION_TOPIC = "/main/init"
+    case CHECK_PIN_VALUE = "/pin/value"
+    case BROKER_STATUS_INIT = "/status/broker/init"
+    case BROKER_STATUS = "/status/broker"
+    case CLIENT_STATUS_INIT = "status/client/init"
+    case CLIENT_STATUS = "status/client"
+    case BROKER_ERROR_INIT = "/error/broker/init"
+    case BROKER_ERROR = "/error/broker"
+    case CLIENT_ERROR_INIT = "/error/client/init"
+    case CLIENT_ERROR = "/error/client"
+
 }

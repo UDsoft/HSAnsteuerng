@@ -11,7 +11,6 @@ import SwiftMQTT
 
 class EinstellungVC: UIViewController,MQTTSessionDelegate {
     
-    public let GPIODICTIONARYKEY = "GPIODICTIONARY"
    
     var appMemory = UserDefaults.standard
     
@@ -24,13 +23,15 @@ class EinstellungVC: UIViewController,MQTTSessionDelegate {
         super.viewDidLoad()
        
         print("NOW IN EINSTELLUNG")
-        if(appMemory.dictionary(forKey: GPIODICTIONARYKEY) == nil){
+        if(appMemory.dictionary(forKey: Keys.Gpio_Pin_Dictionary.rawValue) == nil){
             print("Dictionary Empty")
         }else{
-            gpioDictionary = appMemory.dictionary(forKey: GPIODICTIONARYKEY) as! [String : String]
+            gpioDictionary = appMemory.dictionary(forKey: Keys.Gpio_Pin_Dictionary.rawValue) as! [String : String]
             for (gpioPin , gpioName) in gpioDictionary {
                 print(gpioPin +  " : " + gpioName)
-                let gpioInt = Int(gpioPin)
+                //Change this please
+                let gpioModel = GpioInitModel.init(pinNumber: gpioPin, name: gpioName,unit: "",description: "")
+                let gpioInt = Int(gpioModel.getGpioPinNumber())
                 
                 //Search the button from the button View Tag
                 let gpioSetButton:UIButton = self.view.viewWithTag(gpioInt!)! as! UIButton
@@ -55,6 +56,12 @@ class EinstellungVC: UIViewController,MQTTSessionDelegate {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        updateGpioPinSettingPersistance()
+        print("Item Saved")
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,6 +74,7 @@ class EinstellungVC: UIViewController,MQTTSessionDelegate {
         let title:String = " Gpio Einsteller"
         let message:String = "Stellen Sie das Nama des GPIO " + String(gpioNum)
         var gpioName:String = ""
+        let defaultTitle = "N/A"
         
         
         let gpioManipulator = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -81,21 +89,20 @@ class EinstellungVC: UIViewController,MQTTSessionDelegate {
         let okAction = UIAlertAction(title: "Ok", style: .default) { (okAction) in
             gpioName = (self.InputTextField?.text)!
             print(gpioName)
-            let defaultTitle = "N/A"
             if(!gpioName.isEmpty){
                 sender.setTitle(gpioName, for: .normal)
                 sender.backgroundColor = UIColor.blue
                 sender.alpha = 0.8
                 sender.setTitleColor(UIColor.white, for: .normal)
                 self.gpioDictionary[String(gpioNum)] = gpioName
-                self.appMemory.setValue(self.gpioDictionary, forKey: self.GPIODICTIONARYKEY)
+                //self.appMemory.setValue(self.gpioDictionary, forKey: Keys.Gpio_Pin_Dictionary.rawValue)
             }else{
                 sender.setTitle(defaultTitle, for: .normal)
                 sender.backgroundColor = UIColor.green
                 sender.alpha = 0.5
                 sender.setTitleColor(UIColor.black, for: .normal)
                 self.gpioDictionary.removeValue(forKey: String(gpioNum))
-                self.appMemory.setValue(self.gpioDictionary, forKey: self.GPIODICTIONARYKEY)
+                //self.appMemory.setValue(self.gpioDictionary, forKey: Keys.Gpio_Pin_Dictionary.rawValue)
             }
            
         }
@@ -107,6 +114,11 @@ class EinstellungVC: UIViewController,MQTTSessionDelegate {
         
         self.present(gpioManipulator, animated: true)
         
+    }
+    
+    private func updateGpioPinSettingPersistance(){
+        self.appMemory.set(self.gpioDictionary, forKey: Keys.Gpio_Pin_Dictionary.rawValue)
+        print("all Item Saved")
     }
     
     func settingName(sender:UIButton,gpioName:String) {

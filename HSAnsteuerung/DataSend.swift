@@ -32,54 +32,49 @@ import Foundation
  
 
 class DataSend{
-    let pinLabelNummer = "pinNumber"
-    let pinLabelName = "pinName"
-    let pinValueLabel = "value"
-    var pinNumber:Int
-    var pinName:String
-    var pinValue:Int
+  
+    var group:String
+    var value:String
     
-    init(pinNummer:Int,pinName:String,pinValue:Int) {
-        self.pinNumber = pinNummer
-        self.pinName = pinName
-        self.pinValue = pinValue
+    //Fixed String as the main Naming
+    let groupLabel:String = "group"
+    let valueLabel:String = "werte"
+    
+    init(group:String,value:String) {
+        self.group = group
+        self.value = value
+    
     }
     
-    public func getPinNumber() -> Int {
-        return pinNumber
+    public func getGroup() -> String {
+        return group
     }
     
-    public func getPinName() -> String{
-        return pinName
+    public func getValue() -> String{
+        return value
     }
     
-    public func getPinValue() -> Int{
-        return pinValue
+    
+    public func setGroup(group:String){
+        self.group = group
     }
     
-    public func setPinNumber(pinNumber:Int){
-        self.pinNumber = pinNumber
+    public func setValue(value:String){
+        self.value = value
     }
     
-    public func setPinName(pinName:String){
-        self.pinName = pinName
-    }
     
-    public func setPinValue(pinValue:Int){
-        self.pinValue = pinValue
-        
-    }
     
     public func getDataArray() -> [String:Any]{
-        let dataArray = [pinLabelName:pinName,pinLabelNummer:pinNumber,pinValueLabel:pinValue] as [String : Any]
+        let dataArray = [groupLabel:group,valueLabel:value] as [String : Any]
         print(dataArray)
         return dataArray
     }
     
     public func getDataJson() -> Data{
-        
         let JsonObject = getDataArray()
         let data = try!JSONSerialization.data(withJSONObject: JsonObject, options: .prettyPrinted)
+        print(data)
         return data
     }
     

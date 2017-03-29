@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
     
@@ -19,18 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if(appMemory.value(forKey: Keys.Mqtt_Anonymous.rawValue) == nil){
+        
+    /**
+        if(appMemory.value(forKey: Keys.Mqtt_Anonymous.rawValue) != nil){
+        }else{
             appMemory.set(true, forKey: Keys.Mqtt_Anonymous.rawValue)
+
+            
         }
         
-        if(appMemory.value(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue) == nil){
+        if(appMemory.value(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue) != nil){
+        }else{
             let defaultIpAddress = "192.168.0.101"
             let defaultPort = "1883"
             appMemory.set(defaultIpAddress, forKey: Keys.default_mqtt_Ip_Address.rawValue)
             appMemory.set(defaultPort, forKey: Keys.default_Mqtt_Port.rawValue)
             appMemory.set(false, forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)
+
         }
-   
+   **/
 
         return true
     }
