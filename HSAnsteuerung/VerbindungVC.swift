@@ -179,11 +179,11 @@ class VerbindungVC: UIViewController, MQTTSessionDelegate{
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "VerbindungNachEinstellung"){
-            let einstellungVC:EinstellungVC = segue.destination as! EinstellungVC
+        if(segue.identifier == "VerbindungNachAnsteuerung"){
+            let ansteuerungVC:AnsteuerungVC = segue.destination as! AnsteuerungVC
             
-            if(einstellungVC.mqttClient == nil){
-                einstellungVC.mqttClient = self.mqttClient
+            if(ansteuerungVC.mqttClient == nil){
+                ansteuerungVC.mqttClient = self.mqttClient
             }
         }
     }

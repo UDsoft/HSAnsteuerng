@@ -50,7 +50,7 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         zAchsePicker.delegate = self
         mqttClient?.delegate = self
         
-        /**if(appMemory.bool(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)){
+        if(appMemory.bool(forKey: Keys.Mqtt_User_Set_Personal_IP_Port.rawValue)){
            defaultIPAddress = appMemory.string(forKey: Keys.Mqtt_Ip_Address.rawValue)!
            defaultPort = appMemory.integer(forKey: Keys.Mqtt_Port.rawValue)
         userName = appMemory.string(forKey: Keys.Mqtt_UserName.rawValue)!
@@ -60,7 +60,7 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
             defaultIPAddress = appMemory.string(forKey: Keys.Mqtt_Ip_Address.rawValue)!
             defaultPort = appMemory.integer(forKey: Keys.Mqtt_Port.rawValue)
         }
-        */
+        
         mqttConnect(host: defaultIPAddress, port: UInt16(defaultPort), clientID: "UDIPAD",username: userName , password: password, cleanSession: true, keepAlive: 15)
         
     }
@@ -176,11 +176,11 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if(segue.identifier == "AnsteuerungNachEinstellung"){
-            let einstellungVC:EinstellungVC = segue.destination as! EinstellungVC
+        if(segue.identifier == "AnsteuerungNachVerbindung"){
+            let verbindungVC:VerbindungVC = segue.destination as! VerbindungVC
             
-            if(einstellungVC.mqttClient == nil){
-                einstellungVC.mqttClient = self.mqttClient
+            if(verbindungVC.mqttClient == nil){
+                verbindungVC.mqttClient = self.mqttClient
             }
         }
     }
@@ -248,10 +248,11 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     
     func mqttDidDisconnect(session: MQTTSession) {
         print("Disconnected")
+        showConnectionStatus(isConnected: false)
     }
     
     func mqttSocketErrorOccurred(session: MQTTSession) {
-        
+        showConnectionStatus(isConnected: false)
     }
     
     func mqttDidReceive(message data: Data, in topic: String, from session: MQTTSession) {

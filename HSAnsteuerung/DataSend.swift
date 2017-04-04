@@ -12,22 +12,20 @@ import Foundation
 /*
  eg.
  
- pinNumber = 1 
- pinName = speed
- pinValue = 10
+ group="X"
+ value = 24
  
  convert to jsom
  ++++++++++++++++++++++
  {
-    "pinNummer":"1",
-    "pinName"="speed",
-    "pinValue"="10"
+    group:"X",
+    value:"24"
  }
  ++++++++++++++++++++++
  
  convert to array
  +++++++++++++++++++++
- [pinNummer:1,pinName:speed,pinValue:10]
+ [group:X,value:24]
  */
  
 
