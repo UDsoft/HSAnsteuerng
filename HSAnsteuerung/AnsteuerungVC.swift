@@ -224,13 +224,11 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
             mqttClient?.disconnect()
             connectBtn.setImage(#imageLiteral(resourceName: "ServerDisconnect"), for: .normal)
             isConnected = false
-          
         }else{
             //Connection
             mqttConnect(host: defaultIPAddress, port: UInt16(defaultPort), clientID: "UDIPAD", username: "", password: "",  cleanSession: true, keepAlive: 15)
             isConnected = true;
         }
-        
     }
     
     @IBAction func switchPicker(_ sender: UIButton) {
