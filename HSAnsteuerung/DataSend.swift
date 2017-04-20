@@ -33,14 +33,18 @@ class DataSend{
   
     var group:String
     var value:String
+    var isOffsetZero:Bool
     
     //Fixed String as the main Naming
     let groupLabel:String = "group"
     let valueLabel:String = "werte"
+    let isOffsetZeroLabel:String = "isOffsetZero"
     
-    init(group:String,value:String) {
+    init(group:String,value:String,isOffsetZero:Bool) {
         self.group = group
         self.value = value
+        self.isOffsetZero = isOffsetZero
+        
     
     }
     
@@ -52,6 +56,10 @@ class DataSend{
         return value
     }
     
+    public func getIsOffsetZero() -> Bool{
+        return isOffsetZero
+    }
+    
     
     public func setGroup(group:String){
         self.group = group
@@ -61,10 +69,14 @@ class DataSend{
         self.value = value
     }
     
+    public func setIsOffsetZero(isOffsetZero:Bool){
+        self.isOffsetZero = isOffsetZero
+    }
+    
     
     
     public func getDataArray() -> [String:Any]{
-        let dataArray = [groupLabel:group,valueLabel:value] as [String : Any]
+        let dataArray = [groupLabel:group,valueLabel:value,isOffsetZeroLabel:isOffsetZero] as [String : Any]
         print(dataArray)
         return dataArray
     }

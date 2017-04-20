@@ -18,6 +18,7 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
     @IBOutlet weak var xAchsePicker: UIPickerView!
     @IBOutlet weak var yAchsePicker: UIPickerView!
     @IBOutlet weak var zAchsePicker: UIPickerView!
+    @IBOutlet weak var versetzem_nullpunkt: UISwitch!
 
     @IBOutlet weak var aSwitch: UIButton!
     @IBOutlet weak var informationRequire: UIButton!
@@ -86,6 +87,29 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         
     }
     
+    
+    @IBAction func versetzemNullpunkt(_ sender: UISwitch) {
+        
+        let groupName:String = "offsetZero"
+        var data:DataSend
+        
+        if(versetzem_nullpunkt.isOn){
+            data = DataSend.init(group: groupName, value:"1", isOffsetZero: true)
+        }else{
+            data = DataSend.init(group: groupName, value:"0" , isOffsetZero: false)
+        }
+        
+        mqttClient?.publish(data.getDataJson(), in: Topics.VERSETZEM_NULLPUNKT.rawValue, delivering: .atMostOnce, retain: true){ (succeeded, error) in
+            if(succeeded){
+                print(data)
+            }else{
+                print(error)
+            }
+        }
+        
+        
+    }
+    
     private func mqttConnect(host:String, port:UInt16,clientID:String,username:String , password:String,cleanSession:Bool,keepAlive:UInt16,useSSL:Bool=false){
         mqttClient = MQTTSession.init(host:host, port: port, clientID: clientID, cleanSession: cleanSession, keepAlive: keepAlive, useSSL: useSSL);
         mqttClient!.connect{(succeeded, error) -> Void in
@@ -113,20 +137,26 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // Define the Number of component involved in the Picker view
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
+    //
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-      
+        //Variable To know which Group does the Picker View Belong to
         var group:String = ""
-        
+        // The chosen Data by the user in Picker View
         let value = pickerData[row]
+        
+        //Each Picker view is given the Tag which belong to -
+        //appriopriate group Name Tag-1 = X , Tag -2 = Y and Tag-3 = Z.
+        //Find the Tag of the Picker View user touched and changed .
+        //Set the group variable to String Value of appriopriate Group Name
         switch pickerView.tag{
         case 1:
             group = "X"
@@ -135,15 +165,13 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         case 3:
             group = "Z"
         default: break
-            
-            
         }
         
+        // initialise DataSend Object with the parameter group name and the value chosen.
+        let data:DataSend = DataSend(group: group, value: value,isOffsetZero: versetzem_nullpunkt.isOn)
         
-        
-        let data:DataSend = DataSend(group: group, value: value)
-        
-        mqttClient?.publish(data.getDataJson(), in: "/pin/value", delivering: .atLeastOnce, retain: true){ (succeeded, error) in
+        //Publish the value under the topic /pin/value
+        mqttClient?.publish(data.getDataJson(), in: Topics.OUTPUT_PIN_VALUE.rawValue, delivering: .atLeastOnce, retain: true){ (succeeded, error) in
             if(succeeded){
                 print(data)
             }else{
@@ -185,15 +213,22 @@ class AnsteuerungVC: UIViewController , UIPickerViewDataSource,UIPickerViewDeleg
         }
     }
     
+    //This function will close the connection with the Broker if previously connected
+    //If previous the Application is not connected to Broker it will try to connect.
     @IBAction func connectDisconnect(_ sender: UIButton) {
     
+        //if Application is connected to Broker. Disconnect Action
+        //if Application is not connected to Broker . Connect Action
         if(isConnected){
-            mqttConnect(host: defaultIPAddress, port: UInt16(defaultPort), clientID: "UDIPAD", username: "darwin", password: "1234", cleanSession: true, keepAlive: 15)
-            isConnected = false;
-        }else{
+            //Disconnecting
             mqttClient?.disconnect()
             connectBtn.setImage(#imageLiteral(resourceName: "ServerDisconnect"), for: .normal)
-            isConnected = true
+            isConnected = false
+          
+        }else{
+            //Connection
+            mqttConnect(host: defaultIPAddress, port: UInt16(defaultPort), clientID: "UDIPAD", username: "", password: "",  cleanSession: true, keepAlive: 15)
+            isConnected = true;
         }
         
     }

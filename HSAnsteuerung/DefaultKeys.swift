@@ -24,15 +24,7 @@ enum Keys:String{
 }
 
 enum Topics:String{
-    case INITIALIZATION_TOPIC = "/main/init"
-    case CHECK_PIN_VALUE = "/pin/value"
-    case BROKER_STATUS_INIT = "/status/broker/init"
-    case BROKER_STATUS = "/status/broker"
-    case CLIENT_STATUS_INIT = "status/client/init"
-    case CLIENT_STATUS = "status/client"
-    case BROKER_ERROR_INIT = "/error/broker/init"
-    case BROKER_ERROR = "/error/broker"
-    case CLIENT_ERROR_INIT = "/error/client/init"
-    case CLIENT_ERROR = "/error/client"
+    case OUTPUT_PIN_VALUE = "/pin/value"
+    case VERSETZEM_NULLPUNKT = "/output/current/versetzemnullpunkt"
 
 }

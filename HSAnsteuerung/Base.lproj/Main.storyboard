@@ -474,10 +474,23 @@
                                     <action selector="connectDisconnect:" destination="ayl-Uw-m0O" eventType="touchUpInside" id="nAD-vz-BmJ"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tdf-cI-Vz3">
+                                <rect key="frame" x="143" y="178" width="51" height="31"/>
+                                <connections>
+                                    <action selector="versetzemNullpunkt:" destination="ayl-Uw-m0O" eventType="valueChanged" id="ZO5-BK-p22"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Versetzem Nullpunkt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vt-Co-Mk3">
+                                <rect key="frame" x="214" y="183" width="159" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.65977950507614214" green="0.65977950507614214" blue="0.65977950507614214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Rdb-gC-Raf" firstAttribute="top" secondItem="v1J-Oz-SEb" secondAttribute="bottom" constant="227" id="0b6-7g-Gvp"/>
+                            <constraint firstItem="Tdf-cI-Vz3" firstAttribute="leading" secondItem="dRs-UF-gni" secondAttribute="leadingMargin" constant="123" id="23D-Zl-j0r"/>
                             <constraint firstItem="3Ye-LK-RlA" firstAttribute="centerX" secondItem="JYq-PC-D8n" secondAttribute="centerX" id="40s-gE-NX1"/>
                             <constraint firstItem="x9e-gD-Iin" firstAttribute="top" secondItem="EbD-hj-x6v" secondAttribute="bottom" constant="14" id="50O-pT-dYf"/>
                             <constraint firstItem="lbd-PZ-0eE" firstAttribute="leading" secondItem="C08-a6-RMG" secondAttribute="trailing" constant="30" id="5qG-Sv-Mvy"/>
@@ -487,6 +500,7 @@
                             <constraint firstItem="bo3-Km-6Gq" firstAttribute="leading" secondItem="dRs-UF-gni" secondAttribute="leadingMargin" constant="114" id="AT2-Ni-8ab"/>
                             <constraint firstItem="mOk-xS-rzk" firstAttribute="baseline" secondItem="3Ye-LK-RlA" secondAttribute="baseline" constant="5.5" id="BN6-aU-qFd"/>
                             <constraint firstItem="4zc-pB-PEl" firstAttribute="centerY" secondItem="dRs-UF-gni" secondAttribute="centerY" constant="-237" id="D85-as-xat"/>
+                            <constraint firstItem="1Vt-Co-Mk3" firstAttribute="leading" secondItem="Tdf-cI-Vz3" secondAttribute="trailing" constant="22" id="Enq-VE-xsg"/>
                             <constraint firstItem="C08-a6-RMG" firstAttribute="leading" secondItem="QZ4-pf-RPe" secondAttribute="trailing" constant="30" id="FbB-nI-b8w"/>
                             <constraint firstItem="JYq-PC-D8n" firstAttribute="top" secondItem="8Wh-7O-9fp" secondAttribute="bottom" constant="271" id="FhX-DH-yiH"/>
                             <constraint firstItem="3Ye-LK-RlA" firstAttribute="baseline" secondItem="mOk-xS-rzk" secondAttribute="firstBaseline" constant="-5.5" id="HPw-vq-SrM"/>
@@ -494,6 +508,8 @@
                             <constraint firstItem="4zc-pB-PEl" firstAttribute="top" secondItem="8Wh-7O-9fp" secondAttribute="bottom" constant="65" id="JCL-iv-KtX"/>
                             <constraint firstItem="Y7u-Ty-UUO" firstAttribute="top" secondItem="QZ4-pf-RPe" secondAttribute="bottom" constant="17" id="JbJ-Cw-1yL"/>
                             <constraint firstItem="mOk-xS-rzk" firstAttribute="top" secondItem="4zc-pB-PEl" secondAttribute="bottom" constant="39" id="NOu-4x-TKX"/>
+                            <constraint firstItem="1Vt-Co-Mk3" firstAttribute="top" secondItem="8Wh-7O-9fp" secondAttribute="bottom" constant="163" id="QbC-MH-JFm"/>
+                            <constraint firstItem="bo3-Km-6Gq" firstAttribute="top" secondItem="Tdf-cI-Vz3" secondAttribute="bottom" constant="39" id="RSV-cd-6V1"/>
                             <constraint firstItem="JLn-Mz-VL8" firstAttribute="centerX" secondItem="Rdb-gC-Raf" secondAttribute="centerX" id="Sqx-2i-zAb"/>
                             <constraint firstItem="Y7u-Ty-UUO" firstAttribute="top" secondItem="lbd-PZ-0eE" secondAttribute="bottom" constant="23" id="Tkg-FH-rrE"/>
                             <constraint firstItem="Y7u-Ty-UUO" firstAttribute="top" secondItem="C08-a6-RMG" secondAttribute="bottom" constant="17" id="Ttg-Io-zjd"/>
@@ -516,6 +532,7 @@
                             <constraint firstItem="EbD-hj-x6v" firstAttribute="leading" secondItem="dRs-UF-gni" secondAttribute="leadingMargin" constant="137" id="rtf-ma-3em"/>
                             <constraint firstItem="Syn-Jl-BiW" firstAttribute="leading" secondItem="JLn-Mz-VL8" secondAttribute="trailing" constant="164" id="sZ3-UR-pU2"/>
                             <constraint firstItem="Rdb-gC-Raf" firstAttribute="leading" secondItem="EbD-hj-x6v" secondAttribute="trailing" constant="306" id="scx-Fz-bNK"/>
+                            <constraint firstItem="Tdf-cI-Vz3" firstAttribute="top" secondItem="8Wh-7O-9fp" secondAttribute="bottom" constant="158" id="u88-dR-BVF"/>
                             <constraint firstItem="bo3-Km-6Gq" firstAttribute="baseline" secondItem="mOk-xS-rzk" secondAttribute="baseline" id="uBB-FV-VCc"/>
                             <constraint firstItem="v1J-Oz-SEb" firstAttribute="leading" secondItem="dRs-UF-gni" secondAttribute="leading" id="vdG-hA-MjZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Syn-Jl-BiW" secondAttribute="trailing" constant="67" id="w8Y-2c-mhU"/>
@@ -528,6 +545,7 @@
                         <outlet property="aSwitch" destination="x9e-gD-Iin" id="hIn-vC-39l"/>
                         <outlet property="connectBtn" destination="4zc-pB-PEl" id="2ef-tl-b3K"/>
                         <outlet property="informationRequire" destination="vtN-j8-e3k" id="yXb-gp-92t"/>
+                        <outlet property="versetzem_nullpunkt" destination="Tdf-cI-Vz3" id="d9n-Na-TkY"/>
                         <outlet property="xAchsePicker" destination="IB5-2r-bTS" id="Usz-Dd-qq3"/>
                         <outlet property="xActionLabelButton" destination="bo3-Km-6Gq" id="afd-Bp-5Fs"/>
                         <outlet property="yAchsePicker" destination="QlB-Tp-QvB" id="CZ5-fV-X6j"/>
@@ -546,7 +564,7 @@
                 <panGestureRecognizer minimumNumberOfTouches="1" id="Ldp-h1-hWt"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="1fO-XL-jP0"/>
             </objects>
-            <point key="canvasLocation" x="534" y="728"/>
+            <point key="canvasLocation" x="533.7890625" y="727.34375"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">

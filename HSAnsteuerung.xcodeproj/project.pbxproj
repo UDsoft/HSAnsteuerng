@@ -13,14 +13,11 @@
 		48013BB81E2563E300A3C849 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48013BB71E2563E300A3C849 /* Assets.xcassets */; };
 		48013BBB1E2563E300A3C849 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48013BB91E2563E300A3C849 /* LaunchScreen.storyboard */; };
 		4844BB2C1E38DAA6009EF60E /* DataSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844BB2B1E38DAA6009EF60E /* DataSend.swift */; };
-		4844E06E1E49E0BC00DAD72E /* GpioInitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844E06D1E49E0BC00DAD72E /* GpioInitManager.swift */; };
 		489455351E2568D30074149B /* DefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489455341E2568D30074149B /* DefaultKeys.swift */; };
 		4894553B1E256AAE0074149B /* VerbindungTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4894553A1E256AAE0074149B /* VerbindungTextField.swift */; };
 		4894553D1E256AB60074149B /* VerbindungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4894553C1E256AB60074149B /* VerbindungVC.swift */; };
-		4894553F1E256AC30074149B /* EinstellungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4894553E1E256AC30074149B /* EinstellungVC.swift */; };
 		489455411E256AD00074149B /* AnsteuerungVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489455401E256AD00074149B /* AnsteuerungVC.swift */; };
 		489455431E256B510074149B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489455421E256B510074149B /* Alert.swift */; };
-		48C1D3091E3A12A900A6F818 /* GpioInitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C1D3081E3A12A900A6F818 /* GpioInitModel.swift */; };
 		D4B81899E50957E3BAFD0F09 /* Pods_HSAnsteuerung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E97AC606725267E58188C97 /* Pods_HSAnsteuerung.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,14 +31,11 @@
 		48013BBA1E2563E300A3C849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48013BBC1E2563E300A3C849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4844BB2B1E38DAA6009EF60E /* DataSend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSend.swift; sourceTree = "<group>"; };
-		4844E06D1E49E0BC00DAD72E /* GpioInitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GpioInitManager.swift; sourceTree = "<group>"; };
 		489455341E2568D30074149B /* DefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultKeys.swift; sourceTree = "<group>"; };
 		4894553A1E256AAE0074149B /* VerbindungTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbindungTextField.swift; sourceTree = "<group>"; };
 		4894553C1E256AB60074149B /* VerbindungVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbindungVC.swift; sourceTree = "<group>"; };
-		4894553E1E256AC30074149B /* EinstellungVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EinstellungVC.swift; sourceTree = "<group>"; };
 		489455401E256AD00074149B /* AnsteuerungVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnsteuerungVC.swift; sourceTree = "<group>"; };
 		489455421E256B510074149B /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		48C1D3081E3A12A900A6F818 /* GpioInitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GpioInitModel.swift; sourceTree = "<group>"; };
 		7E71F9D68E1B824BE1DC3513 /* Pods-HSAnsteuerung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSAnsteuerung.release.xcconfig"; path = "Pods/Target Support Files/Pods-HSAnsteuerung/Pods-HSAnsteuerung.release.xcconfig"; sourceTree = "<group>"; };
 		9E97AC606725267E58188C97 /* Pods_HSAnsteuerung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSAnsteuerung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -100,8 +94,6 @@
 			children = (
 				489455341E2568D30074149B /* DefaultKeys.swift */,
 				4844BB2B1E38DAA6009EF60E /* DataSend.swift */,
-				48C1D3081E3A12A900A6F818 /* GpioInitModel.swift */,
-				4844E06D1E49E0BC00DAD72E /* GpioInitManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -110,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				489455401E256AD00074149B /* AnsteuerungVC.swift */,
-				4894553E1E256AC30074149B /* EinstellungVC.swift */,
 				4894553C1E256AB60074149B /* VerbindungVC.swift */,
 			);
 			name = ViewController;
@@ -274,14 +265,11 @@
 			files = (
 				489455431E256B510074149B /* Alert.swift in Sources */,
 				489455411E256AD00074149B /* AnsteuerungVC.swift in Sources */,
-				48C1D3091E3A12A900A6F818 /* GpioInitModel.swift in Sources */,
 				4894553B1E256AAE0074149B /* VerbindungTextField.swift in Sources */,
 				489455351E2568D30074149B /* DefaultKeys.swift in Sources */,
 				4844BB2C1E38DAA6009EF60E /* DataSend.swift in Sources */,
-				4894553F1E256AC30074149B /* EinstellungVC.swift in Sources */,
 				48013BAE1E2563E300A3C849 /* AppDelegate.swift in Sources */,
 				4894553D1E256AB60074149B /* VerbindungVC.swift in Sources */,
-				4844E06E1E49E0BC00DAD72E /* GpioInitManager.swift in Sources */,
 				48013BB61E2563E300A3C849 /* HSAnsteuerung.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
